@@ -31,6 +31,11 @@ void remove_elemento(celula *le, int x){
 }
 
 void remove_todos_elementos(celula *le, int x){
+
+    while(le != NULL && (le->dado x)){ //Encontrar o primeiro elemento x na lista
+        le = le->prox;
+    }
+
     while (le != NULL){
         if (le->dado == x){ //Caso o elemento encontrado seja x, o lixo é removido e a lista atualizada
             lixo -> prox = le->prox;
