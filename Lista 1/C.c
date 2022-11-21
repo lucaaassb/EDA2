@@ -15,7 +15,6 @@ int remove_depois(celula *p){
         return x;
     }
     
-
 void remove_elemento(celula *le, int x){
     celula *lixo = le->prox;
 
