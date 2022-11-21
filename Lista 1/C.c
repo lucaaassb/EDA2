@@ -8,39 +8,39 @@ typedef struct celula
 } celula;
 
 int remove_depois(celula *p){
-    celula *lixo;
-    int x;
-    if (p->prox == NULL){
-        printf("Erro: lista vazia ou posicao invalida\n");
-        exit(1);
+    celula *lixo = p->prox;
+    if (lixo != NULL){
+        p->prox = lixo->prox;
+        free(lixo);
+        return 1;
+    } else {
+        return 0;
     }
-    lixo = p->prox;
-    x = lixo->dado;
-    p->prox = lixo->prox;
-    free(lixo);
-    return x;
 }
 
 void remove_elemento(celula *le, int x){
-    celula *p, *lixo;
-    for (p = le; p->prox != NULL; p = p->prox){
-        if (p->prox->dado == x){
-            lixo = p->prox;
-            p->prox = lixo->prox;
-            free(lixo);
-            return;
-        }
+    celula *lixo = le->prox;
+
+    while (lixo != NULL && lixo->dado != x){
+        lixo = lixo->prox;
     }
-    printf("Elemento %d nao encontrado\n", x);
+    if(lixo != NULL){
+        le->prox = lixo->prox;
+        free(lixo);
+    }
 }
 
 void remove_todos_elementos(celula *le, int x){
-    celula *p, *lixo;
-    for (p = le; p->prox != NULL; p = p->prox){
-        while (p->prox != NULL && p->prox->dado == x){
-            lixo = p->prox;
-            p->prox = lixo->prox;
-            free(lixo);
+    while (le->prox != NULL && le->prox->dado == x){
+        remove_depois(le);
+    }
+
+    celula *lixo = le->prox;
+    while (lixo != NULL){
+        if (lixo->prox != NULL && lixo->prox->dado == x){
+            remove_depois(lixo);
+        } else {
+            lixo = lixo->prox;
         }
     }
 }
