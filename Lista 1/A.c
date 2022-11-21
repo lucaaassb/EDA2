@@ -14,26 +14,19 @@ typedef struct celula{
 
 void imprime(celula *le){
     celula *p;
-    for(p = le->prox; p != NULL; p = p->prox){
+    for(celula *p = le->prox; p != NULL; p = p->prox){
         printf("%d ", p->dado);
     }
-    // for (p = le; p != NULL; p = p->prox)
-    //     printf("%d\n", p->dado);
     printf("NULL");
 }
 
 //========================================================//
 
 void imprime_rec(celula *le){
-    if (le != NULL){
-        printf("%d\n", le->prox->dado);
-        imprime_rec(le->prox);
-    } else {
-        printf("NULL");
+    if (le -> prox != NULL) printf("NULL");
+    else{
+        celula *p = le->prox;
+        printf("%d ", p->dado);
+        imprime_rec(p);
     }
-
-    // if (le != NULL){
-    //     printf("%d\n", le->dado);
-    //     imprime(le->prox);
-    // }
 }

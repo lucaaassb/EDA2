@@ -1,46 +1,42 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct celula
-{
+typedef struct celula{
     int dado;
     struct celula *prox;
 } celula;
 
 int remove_depois(celula *p){
     celula *lixo = p->prox;
-    if (lixo != NULL){
+    if (lixo == NULL){
+        int x = lixo->dado;
         p->prox = lixo->prox;
         free(lixo);
-        return 1;
-    } else {
-        return 0;
+        return x;
     }
-}
+    
 
 void remove_elemento(celula *le, int x){
     celula *lixo = le->prox;
 
-    while (lixo != NULL && lixo->dado != x){
+    while (lixo != NULL && lixo->dado != x){ //Percorrer a lista até achar o valor x e vai passando "lixo" para o próximo elemento
+        le = lixo;
         lixo = lixo->prox;
     }
-    if(lixo != NULL){
+
+    if (lixo != NULL){ //Se o elemento "lixo" for encontrado
         le->prox = lixo->prox;
         free(lixo);
     }
 }
 
 void remove_todos_elementos(celula *le, int x){
-    while (le->prox != NULL && le->prox->dado == x){
-        remove_depois(le);
-    }
-
-    celula *lixo = le->prox;
-    while (lixo != NULL){
-        if (lixo->prox != NULL && lixo->prox->dado == x){
-            remove_depois(lixo);
-        } else {
-            lixo = lixo->prox;
+    while (le != NULL){
+        if (le->dado == x){ //Caso o elemento encontrado seja x, o lixo é removido e a lista atualizada
+            lixo -> prox = le->prox;
+        } else { //Se não, o lixo se mantém
+            lixo = le;
         }
+        le = le->prox;
     }
 }
